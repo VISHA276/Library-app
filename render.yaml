@@ -1,0 +1,37 @@
+services:
+  # Backend Django API Service
+  - type: web
+    name: library-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn library_project.wsgi
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    plan: free
+
+  # Frontend React Service  
+  - type: web
+    name: library-frontend
+    runtime: node
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    publicDir: build
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: library-backend
+          property: url
+      - key: NODE_VERSION
+        value: "20"
+    plan: free
+
+databases:
+  - name: library-db
+    databaseName: library
+    plan: free

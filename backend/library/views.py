@@ -14,7 +14,7 @@ from django.db.models import Q
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]  # Allow anyone to view books
 
     def get_queryset(self):
         queryset = Book.objects.all()

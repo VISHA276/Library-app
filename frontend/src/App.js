@@ -34,14 +34,7 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              <Route
-                path="/books"
-                element={
-                  <PrivateRoute>
-                    <BookList />
-                  </PrivateRoute>
-                }
-              />
+              <Route path="/books" element={<BookList />} />
               <Route
                 path="/books/:id"
                 element={
@@ -58,15 +51,15 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              <Route
-                path="/return"
+              <Route path="/return"
                 element={
                   <PrivateRoute>
                     <ReturnBook />
                   </PrivateRoute>
                 }
               />
-              <Route path="/" element={<Navigate to="/dashboard" />} />
+              <Route path="/" element={<BookList />} />
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </div>
         </div>

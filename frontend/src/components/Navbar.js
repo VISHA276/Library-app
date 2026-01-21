@@ -17,25 +17,27 @@ const Navbar = () => {
         <Link to="/" className="navbar-brand">
           Library Management System
         </Link>
-        {isAuthenticated ? (
-          <div className="navbar-links">
-            <Link to="/dashboard">Dashboard</Link>
-            <Link to="/books">Books</Link>
-            <Link to="/issue">Issue Book</Link>
-            <Link to="/return">Return Book</Link>
-            {user && (
-              <span style={{ marginRight: '10px' }}>
-                {user.user?.first_name || user.user?.username}
-              </span>
-            )}
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-        ) : (
-          <div className="navbar-links">
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
-          </div>
-        )}
+        <div className="navbar-links">
+          <Link to="/books">Books</Link>
+          {isAuthenticated ? (
+            <>
+              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/issue">Issue Book</Link>
+              <Link to="/return">Return Book</Link>
+              {user && (
+                <span style={{ marginRight: '10px' }}>
+                  {user.user?.first_name || user.user?.username}
+                </span>
+              )}
+              <button onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Signup</Link>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );
